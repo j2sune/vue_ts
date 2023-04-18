@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1><a href="javascript:;">ejs</a></h1>
+    <h1><a href="javascript:;">Vue</a></h1>
     <div class="mnavBtnBox">
         <button type="button" class="mnavBtn mnavOpen">열기</button>
     </div>

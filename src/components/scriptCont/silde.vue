@@ -1,17 +1,8 @@
 <template>
   <div class="slide bundleCont">
     <div class="slideBox">
-      <div class="slideList slide1">
-          <img src="/img/1.png" alt="슬라이드1">
-      </div>
-      <div class="slideList slide2">
-          <img src="/img/2.png" alt="슬라이드2">
-      </div>
-      <div class="slideList slide3">
-          <img src="/img/3.png" alt="슬라이드3">
-      </div>
-      <div class="slideList slide4">
-          <img src="/img/4.png" alt="슬라이드4">
+      <div v-for="(item, idx) in slideData" :key="idx" class="slideList" :class="item.cname">
+        <img :src="item.url" :alt="item.alt">
       </div>
     </div>
     <div class="slideNum">
@@ -23,10 +14,9 @@
     </div>
     <div class="slidePage">
       <ul class="slidePageList">
-          <li><button type="button">1</button></li>
-          <li><button type="button">2</button></li>
-          <li><button type="button">3</button></li>
-          <li><button type="button">4</button></li>
+          <li v-for="(item, idx) in slideData" :key="idx">
+            <button type="button">{{ idx + 1 }}</button>
+          </li>
       </ul>
     </div>
   </div>
@@ -36,6 +26,19 @@
 
   import type { Ref } from 'vue'
   import { onMounted, ref } from 'vue'
+
+  type dataType = {
+    cname:string,
+    url:string,
+    alt:string
+  }
+
+  const slideData:dataType[] = [
+    {cname:'slide1', url:'/img/1.png', alt:'슬라이드1'},
+    {cname:'slide2', url:'/img/2.png', alt:'슬라이드2'},
+    {cname:'slide3', url:'/img/3.png', alt:'슬라이드3'},
+    {cname:'slide4', url:'/img/4.png', alt:'슬라이드4'}
+  ]
 
   let slideBox:HTMLElement;
   let slideList:HTMLCollection;
@@ -49,7 +52,6 @@
     slideBox = document.querySelector('.slideBox') as HTMLElement;
     slideList = document.getElementsByClassName('slideList') as HTMLCollection;
     slideW = slide.offsetWidth;
-    slidePage = document.querySelectorAll('.slidePageList li') as NodeList;
     nowNum = document.getElementById('nowNum') as HTMLElement;
     const allNum = document.getElementById('allNum') as HTMLElement;
 
@@ -71,6 +73,7 @@
     const slideMove = slideIdx * slideW;
     const slidePrev = document.querySelector('.slidePrev') as HTMLButtonElement;
     const slideNext = document.querySelector('.slideNext') as HTMLButtonElement;
+    slidePage = document.querySelectorAll('.slidePageList li') as NodeList;
 
     slideList[slideIdx].classList.add('slideOn');
     (slidePage[slideIdx] as HTMLElement).classList.add('slideBon');
