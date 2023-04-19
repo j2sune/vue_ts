@@ -45,7 +45,7 @@ npm run build
 npm run lint
 ```  
 
-### Directory
+## Directory
 
 App    
 - index  
