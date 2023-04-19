@@ -44,3 +44,15 @@ npm run build
 ```sh
 npm run lint
 ```
+
+
+App    
+- index  
+  - defaultLayout  
+    - headerView  
+    - IntroView  
+      └ TheWelcome - WelcomeItem
+    - MainView
+      └ scriptCont - components
+      └ popupCont
+      
