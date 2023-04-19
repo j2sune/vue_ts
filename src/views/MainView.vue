@@ -4,53 +4,8 @@
       <h2 class="mainTit">{{ bdItem.mainTit }}</h2>
       <button type="button" class="about popOpen" @click="popOpen($event)">작업 방식</button>
       <component :is="bdItem.componentName"></component>
+			<component :is="search" v-if="bdItem.componentName == tooltip"></component>
       <popCont :codeList="bdItem.popInner" :nowScroll="ref(nowScroll)"></popCont>
-    </div>
-    <div class="bundle">
-      <h2 class="mainTit">🗨️ 툴팁 & 검색 박스</h2>
-      <button type="button" class="about popOpen">작업 방식</button>
-      <div class="tooltip bundleCont">
-        <p class="toolTxt">설명 보기</p>
-        <button type="button" class="toolBtn">?</button>
-        <div class="toolpopBox">
-          좋아하는 맛이나 향을 더해도 OK<br />소중한 이들을 위한 선물로도 좋아요
-          <button type="button" class="tooltipClose">닫기</button>
-        </div>
-      </div>
-      <div class="search bundleCont">
-        <p class="searchBox">
-          <input type="text" class="searchInput" />
-          <button type="button" class="searchRemove">삭제</button>
-        </p>
-        <button type="button" class="searchBtn">검색</button>
-      </div>
-      <div class="popup">
-        <div class="popDim"></div>
-        <div class="popCont">
-          <div class="popTop">
-            <h3 class="mainWork">주요 작업</h3>
-            <button type="button" class="popClose">닫기</button>
-          </div>
-          <div class="aboutBox">
-            <ul class="aboutList">
-              <li>
-                <p class="aboutTit">작업 요건</p>
-                <p>스크롤에 따라서 가려지지 않도록 스스로 위치 이동</p>
-              </li>
-              <li>
-                <p class="aboutTit">1. 툴팁 : scroll 이벤트를 이용한 제어</p>
-                <p>getBoundingCilentRect() : 현재 스크롤 위치에서 콘텐츠까지의 거리</p>
-                <img src="/img/tooltip1.png" alt="툴팁 제어 이벤트" />
-              </li>
-              <li>
-                <p class="aboutTit">2. 검색 박스 : keyup 이벤트를 이용한 제어</p>
-                <p>keyup() : 키보드 입력 후 손을 뗐을 때 작동</p>
-                <img src="/img/search1.png" alt="검색 박스 제어 이벤트" />
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="bundle">
       <h2 class="mainTit">🪄 소팅 테이블</h2>
@@ -461,8 +416,8 @@
       <button type="button" class="toastBtn" id="cart" value="장바구니">장바구니</button>
       <button type="button" class="toastBtn" id="create" value="등록 완료">등록</button>
       <button type="button" class="toastBtn" id="delete" value="삭제 완료">삭제</button>
-    </div>
-    <div class="toastPop"></div>
+			<div class="toastPop"></div>
+		</div>
     <div class="layerPop">
       <button class="layerPopOpen">레이어팝업 열기</button>
       <div class="layerPopBox" style="display: none">
@@ -563,6 +518,8 @@ import popCont from '../components/popupCont.vue'
 import slide from '../components/scriptCont/silde.vue'
 import tab from '../components/scriptCont/tab.vue'
 import arrcodion from '../components/scriptCont/arrcodion.vue'
+import tooltip from '../components/scriptCont/tooltip.vue'
+import search from '../components/scriptCont/search.vue'
 
 type codeListType = {
   componentName: Component
@@ -648,13 +605,36 @@ const codeList: codeListType[] = [
         tit: '2. 이벤트 상세 구현',
         cont: '클릭 시 active 의 유무를 확인해서 토글 이벤트를 구현하고, active가 없는 객체 클릭 시 그 객체를 스크롤 제일 상단으로 이동시킨다. 아코디언이 열릴 때의 애니메이션을 위해 자식 갯수를 구해 높이값을 직접 설정해줬다.',
         img: '/img/arrco2.png',
-        alt: '아코디언 세부 구현현'
+        alt: '아코디언 세부 구현'
       },
       {
         tit: '3. 전체 열림, 닫힘 구현 (아코디언2)',
         cont: '전체 열림 클릭 시 버튼의 텍스트 변경 (닫힘 클릭에도 동일), 모든 아코디언 한 번에 열리고 닫히게 구현, 아코디언이 열릴 때의 애니메이션을 위해 자식 갯수를 구해 높이값을 직접 설정해줬다.',
         img: '/img/arrco3.png',
         alt: '아코디언 전체 열림, 닫힘'
+      }
+    ]
+  },
+  {
+    componentName: tooltip,
+    mainTit: '🗨️ 툴팁 & 검색 박스',
+    mainWork: false,
+    popInner: [
+      {
+        tit: '작업 요건',
+        cont: '스크롤에 따라서 가려지지 않도록 스스로 위치 이동'
+      },
+      {
+        tit: '1. 툴팁 : scroll 이벤트를 이용한 제어',
+        cont: 'getBoundingCilentRect() : 현재 스크롤 위치에서 콘텐츠까지의 거리',
+        img: '/img/tooltip1.png',
+        alt: '툴팁 제어 이벤트'
+      },
+      {
+        tit: '2. 검색 박스 : keyup 이벤트를 이용한 제어',
+        cont: 'keyup() : 키보드 입력 후 손을 뗐을 때 작동',
+        img: '/img/search1.png',
+        alt: '검색 박스 제어 이벤트'
       }
     ]
   }

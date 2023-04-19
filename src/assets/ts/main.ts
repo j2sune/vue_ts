@@ -16,4 +16,22 @@ const gnb = (e:MouseEvent) => {
   }
 }
 
-export { gnb }
+const tooltip = () => {
+  const tooltip:HTMLElement | null = document.querySelector('.tooltip');
+  const toolPop:HTMLElement | null = document.querySelector('.toolpopBox');
+  let toolH:number;
+
+  window.addEventListener('scroll', function() {
+      if (tooltip != null) {
+        toolH = tooltip.getBoundingClientRect().top;
+      }
+
+      if (toolH > 100 && toolPop != null) {
+          toolPop.classList.add('top');
+      } else if (toolH < 100 && toolPop != null) {
+          toolPop.classList.remove('top');
+      }
+  });
+}
+
+export { gnb, tooltip }
