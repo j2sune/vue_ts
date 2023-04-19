@@ -8,9 +8,9 @@ App
       └ TheWelcome - WelcomeItem
     - MainView  
       └ scriptCont - components  
-      └ popupCont
+      └ popupCont  
       
-
+      
 # vue-project
 
 This template should help get you started developing with Vue 3 in Vite.
