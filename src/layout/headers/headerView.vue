@@ -7,7 +7,7 @@
     <nav class="gnb">
         <ul class="gnbList">
             <li v-for="(item, idx) in menu" :key="idx">
-              <a href="javascript:;" @mouseover=gnbOn($event) @mouseleave=gnbOver($event)>{{ item.dep1 + (idx + 1)}}</a>
+              <a href="javascript:;" @mouseover=gnb($event) @mouseleave=gnb($event)>{{ item.dep1 + (idx + 1)}}</a>
               <ul class="gnbListSub">
                 <li v-for="(item2, idx) in item.dep2" :key="idx">
                   <a href="javascript:;">{{ item2 }}</a>
@@ -25,28 +25,11 @@
 
 <script setup lang="ts">
 
+  import { gnb } from './../../assets/ts/main'
+
   type menuType = {
     dep1:string,
     dep2:string[]
-  }
-
-  function gnbOn(e:MouseEvent) {
-    if (e.target instanceof HTMLElement) {
-      e.target.closest('li')?.classList.add('on')
-      const dep2 = e.target.closest('li')?.lastElementChild
-      if (dep2 instanceof HTMLElement) {
-        dep2.style.height = dep2.children.length * 36 + 'px';
-      }
-    }
-  }
-  function gnbOver(e:MouseEvent) {
-    if (e.target instanceof HTMLElement) {
-      e.target.closest('li')?.classList.remove('on')
-      const dep2 = e.target.closest('li')?.lastElementChild
-      if (dep2 instanceof HTMLElement) {
-        dep2.style.height = 0 + 'px';
-      }
-    }
   }
   
   const menu:menuType[] = [

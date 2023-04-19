@@ -37,9 +37,9 @@
       
   function arrcodion(event:MouseEvent) {
     if (event.target != null && event.target instanceof HTMLButtonElement) {
-      const arrcoSub = event.target.closest('.accordionSub')
-      const arrcoSubTop = arrcoSub?.getBoundingClientRect().top;
-      const nowScroll = window.pageYOffset;
+      const arrcoSub:HTMLButtonElement | null = event.target.closest('.accordionSub')
+      const arrcoSubTop:number | undefined = arrcoSub?.getBoundingClientRect().top;
+      const nowScroll:number = window.pageYOffset;
 
       if (arrcoSub?.classList.contains('aaactive')) {
         arrcoSub?.classList.remove('aaactive')

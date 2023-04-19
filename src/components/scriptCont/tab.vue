@@ -29,7 +29,7 @@
   ]
 
   function tabControl(e:number, event:MouseEvent) {
-    const tabList = document.querySelectorAll('.tabList li') as NodeList
+    const tabList:NodeList = document.querySelectorAll('.tabList li');
     activeTab.value = e
     if (event.target instanceof HTMLButtonElement) {
       tabList.forEach((item) => {
