@@ -52,7 +52,7 @@ App
     - headerView  
     - IntroView  
       └ TheWelcome - WelcomeItem
-    - MainView
-      └ scriptCont - components
+    - MainView  
+      └ scriptCont - components  
       └ popupCont
       
