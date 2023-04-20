@@ -8,78 +8,6 @@
       <popCont :codeList="bdItem.popInner" :nowScroll="ref(nowScroll)"></popCont>
     </div>
     <div class="bundle">
-      <h2 class="mainTit">🪄 소팅 테이블</h2>
-      <button type="button" class="about popOpen">작업 방식</button>
-      <div class="sorting bundleCont">
-        <table>
-          <thead>
-            <th><button type="button" class="sortBtn" id="score">순위</button></th>
-            <th><button type="button" class="sortBtn" id="name">음원명</button></th>
-            <th><button type="button" class="sortBtn" id="artist">가수</button></th>
-            <th><button type="button" class="sortBtn" id="date">발매일</button></th>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="popup">
-        <div class="popDim"></div>
-        <div class="popCont">
-          <div class="popTop">
-            <h3 class="mainWork">주요 작업</h3>
-            <button type="button" class="popClose">닫기</button>
-          </div>
-          <div class="aboutBox">
-            <ul class="aboutList">
-              <li>
-                <p class="aboutTit">작업 요건</p>
-                <p>
-                  테이블의 자료는 배열로 되어있어 초기 로드 시 자동으로 구현되며, th 클릭 시 해당 열
-                  정렬
-                </p>
-                <p>클릭 시 정렬 순서 : 오름차순 -> 내림차순 -> 초기값 반복</p>
-              </li>
-              <li>
-                <p class="aboutTit">1. 테이블 구조 생성</p>
-                <p>정렬 구분자가 될 id 값을 삽입하여 버튼 생성</p>
-                <img src="/img/sort1.png" alt="테이블 구조 생성" />
-              </li>
-              <li>
-                <p class="aboutTit">2. 배열 자료 생성 후 화면에 구현</p>
-                <p>innerHTML 을 이용한 배열의 html화</p>
-                <img src="/img/sort2.png" alt="배열 DOM 구현" />
-              </li>
-              <li>
-                <p class="aboutTit">
-                  3. 다른 행을 눌렀을 때 정렬 순서가 혼동되는 일이 없도록 정렬 선언
-                </p>
-                <p>클릭에 따른 유동적인 변수값을 활용한다.</p>
-                <img src="/img/sort3.png" alt="배열 DOM 구현" />
-              </li>
-              <li>
-                <p class="aboutTit">4. sortTable() 생성 - 생성 시 꼭 필요한 변수 제어</p>
-                <p>
-                  현재 클릭한 행의 id와 마지막으로 정렬 진행되었던 행의 id를 비교하며 정렬 진행한다.
-                </p>
-                <p>함수 마지막에서 마지막으로 정렬 진행되었던 id값 변경하는 구문이 꼭 필요하다.</p>
-                <img src="/img/sort4.png" alt="sortTable() - 변수 제어" />
-              </li>
-              <li>
-                <p class="aboutTit">4. sortTable() 생성 - number 타입에서의 데이터 정렬</p>
-                <p>sort(), 클릭에 따른 유동적인 변수값을 활용한다 22</p>
-                <img src="/img/sort5.png" alt="sortTable() - 숫자 타입" />
-              </li>
-              <li>
-                <p class="aboutTit">4. sortTable() 생성 - string 타입에서의 데이터 정렬</p>
-                <p>sort(), 클릭에 따른 유동적인 변수값을 활용한다 22</p>
-                <p>number 타입과 정렬 방식만 다르고 다 동일하다</p>
-                <img src="/img/sort6.png" alt="sortTable() - 문자 타입" />
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bundle">
       <h2 class="mainTit">🚡 스크롤 탭</h2>
       <button type="button" class="about popOpen">작업 방식</button>
       <div class="tab2 bundleCont">
@@ -520,6 +448,7 @@ import tab from '../components/scriptCont/tab.vue'
 import arrcodion from '../components/scriptCont/arrcodion.vue'
 import tooltip from '../components/scriptCont/tooltip.vue'
 import search from '../components/scriptCont/search.vue'
+import sortTable from '../components/scriptCont/sortTable.vue'
 
 type codeListType = {
   componentName: Component
@@ -635,6 +564,53 @@ const codeList: codeListType[] = [
         cont: 'keyup() : 키보드 입력 후 손을 뗐을 때 작동',
         img: '/img/search1.png',
         alt: '검색 박스 제어 이벤트'
+      }
+    ]
+  },
+  {
+    componentName: sortTable,
+    mainTit: '🪄 소팅 테이블',
+    mainWork: false,
+    popInner: [
+      {
+        tit: '작업 요건',
+        cont: '테이블의 자료는 배열로 되어있어 초기 로드 시 자동으로 구현되며, th 클릭 시 해당 열 정렬, 클릭 시 정렬 순서 : 오름차순 -> 내림차순 -> 초기값 반복'
+      },
+      {
+        tit: '1. 테이블 구조 생성',
+        cont: '정렬 구분자가 될 id 값을 삽입하여 버튼 생성',
+        img: '/img/sort1.png',
+        alt: '테이블 구조 생성'
+      },
+      {
+        tit: '2. 배열 자료 생성 후 화면에 구현',
+        cont: 'innerHTML 을 이용한 배열의 html화',
+        img: '/img/sort2.png',
+        alt: '배열 DOM 구현'
+      },
+      {
+        tit: '3. 다른 행을 눌렀을 때 정렬 순서가 혼동되는 일이 없도록 정렬 선언',
+        cont: '클릭에 따른 유동적인 변수값을 활용한다.',
+        img: '/img/sort3.png',
+        alt: '배열 DOM 구현'
+      },
+      {
+        tit: '4. sortTable() 생성 - 생성 시 꼭 필요한 변수 제어',
+        cont: '현재 클릭한 행의 id와 마지막으로 정렬 진행되었던 행의 id를 비교하며 정렬 진행한다.',
+        img: '/img/sort4.png',
+        alt: 'sortTable() - 변수 제어'
+      },
+      {
+        tit: '4. sortTable() 생성 - number 타입에서의 데이터 정렬',
+        cont: 'sort(), 클릭에 따른 유동적인 변수값을 활용한다 22',
+        img: '/img/sort5.png',
+        alt: 'sortTable() - 숫자 타입'
+      },
+      {
+        tit: '4. sortTable() 생성 - string 타입에서의 데이터 정렬',
+        cont: 'sort(), 클릭에 따른 유동적인 변수값을 활용한다 22, number 타입과 정렬 방식만 다르고 다 동일하다',
+        img: '/img/sort6.png',
+        alt: 'sortTable() - 문자 타입'
       }
     ]
   }
