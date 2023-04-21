@@ -1,5 +1,5 @@
 <template>
-  <div class="sorting bundleCont">
+  <div class="sorting">
     <table>
       <thead>
         <th v-for="(value, key) in thCont" :key="key">
@@ -42,10 +42,6 @@
     date: number
   }
 
-  /* 테이블 정렬 */
-  let sortType = 'init'
-  let existItemId = 'none'
-
   const thCont:thType = { score: '순위', name: '음원명', artist: '가수', date: '발매일' }
 
   const sortData: dataType[] = [
@@ -61,6 +57,11 @@
     { score: 4, name: '신호등', artist: '이무진', date: 20210819 }
   ]
 
+  /* 테이블 상태 구분 코드 */
+  let sortType = 'init'
+  let existItemId = 'none'
+
+  /* 테이블 DOM */
   function tableInsert(tableValue:dataType[]) {
     let tr = ''
     tableValue.forEach((item:dataType) => {
@@ -71,7 +72,7 @@
       + '<td>' + item.date + '</td>'
       + '</tr>'
     })
-
+    
     return tr
   }
 
@@ -93,21 +94,21 @@
       }
 
       if (clickId == 'score') {
-        const name = "score"
+        const ivalue = 'score'
         result = sortData.sort((a:dataType, b:dataType) :number => {
           if (sortType === 'init') {
-            sortFc = a[name] - b[name]
+            sortFc = a[ivalue] - b[ivalue]
           } else if (sortType === 'asc') {
-            sortFc = b[name] - a[name]
+            sortFc = b[ivalue] - a[ivalue]
           } 
           return sortFc
         })
       } else if (clickId == 'name') {
-        const name = "name"
+        const ivalue = 'name'
         result = sortData.sort((a:dataType, b:dataType) :number => {
           if (sortType === 'init') {
-            let x = a[name].toLowerCase()
-            let y = b[name].toLowerCase()
+            let x = a[ivalue].toLowerCase()
+            let y = b[ivalue].toLowerCase()
             if (x < y) {
               return -1
             }
@@ -116,8 +117,8 @@
             }
             return 0 
           } else if (sortType === 'asc') {
-            let x = a[name].toLowerCase();
-            let y = b[name].toLowerCase();
+            let x = a[ivalue].toLowerCase();
+            let y = b[ivalue].toLowerCase();
             if (x > y) {
               return -1;
             }
@@ -130,11 +131,11 @@
           return 0
         })
       } else if (clickId == 'artist') {
-        const name = "artist"
+        const ivalue = 'artist'
         result = sortData.sort((a:dataType, b:dataType) :number => {
           if (sortType === 'init') {
-            let x = a[name].toLowerCase()
-            let y = b[name].toLowerCase()
+            let x = a[ivalue].toLowerCase()
+            let y = b[ivalue].toLowerCase()
             if (x < y) {
               return -1
             }
@@ -143,8 +144,8 @@
             }
             return 0 
           } else if (sortType === 'asc') {
-            let x = a[name].toLowerCase();
-            let y = b[name].toLowerCase();
+            let x = a[ivalue].toLowerCase();
+            let y = b[ivalue].toLowerCase();
             if (x > y) {
               return -1;
             }
@@ -157,12 +158,12 @@
           return 0
         })
       } else {
-        const name = "date"
+        const ivalue = 'date'
         result = sortData.sort((a:dataType, b:dataType) :number => {
           if (sortType === 'init') {
-            sortFc = a[name] - b[name]
+            sortFc = a[ivalue] - b[ivalue]
           } else if (sortType === 'asc') {
-            sortFc = b[name] - a[name]
+            sortFc = b[ivalue] - a[ivalue]
           } 
           return sortFc
         })

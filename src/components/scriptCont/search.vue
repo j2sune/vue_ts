@@ -1,5 +1,5 @@
 <template>
-  <div class="search bundleCont">
+  <div class="search">
         <p class="searchBox">
           <input type="text" class="searchInput" />
           <button type="button" class="searchRemove">삭제</button>

@@ -1,5 +1,5 @@
 <template>
-  <div class="accordionBox bundleCont">
+  <div class="accordionBox">
     <ul class="accordion">
       <li class="accordionSub" v-for="(item, idx) in arrcoList" :key="idx">
         <button href="javascript:;" class="accordionTit" @click="arrcodion($event)">{{ item.arrcoTit }}</button>

@@ -1,5 +1,5 @@
 <template>
-  <div class="slide bundleCont">
+  <div class="slide">
     <div class="slideBox">
       <div v-for="(item, idx) in slideData" :key="idx" class="slideList" :class="item.cname">
         <img :src="item.url" :alt="item.alt">

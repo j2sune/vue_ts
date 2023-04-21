@@ -1,5 +1,5 @@
 <template>
-  <div class="tab bundleCont">
+  <div class="tab">
     <ul class="tabList">
       <li v-for="(item, idx) in tabList" :key="idx" :class="idx == activeTab ? 'tabOn' : ''">
         <button href="javascript:;" class="tabMenu" @click="tabControl(idx, $event)">tab{{ idx + 1 }}</button>

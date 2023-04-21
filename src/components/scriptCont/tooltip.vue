@@ -1,5 +1,5 @@
 <template>
-  <div class="tooltip bundleCont" :class="toolOpen == true ? 'toolOn' : ''">
+  <div class="tooltip" :class="toolOpen == true ? 'toolOn' : ''">
     <p class="toolTxt">설명 보기</p>
     <button type="button" class="toolBtn" @click="toolControl($event)">?</button>
     <div class="toolpopBox">
