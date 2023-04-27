@@ -8,31 +8,7 @@
     </ul>
     <div class="cateAdd">
         <button type="button" class="openAdd" @click="addClick($event)"><span class="hidden">등록</span></button>
-        <div class="cateAddpop" v-if="addPop == true">
-            <div class="PopWrap">
-                <p class="popTit">이미지 등록</p>
-                <div class="popInfo">
-                    <p>
-                        <label for="img_cate">카테고리</label>
-                        <select name="" id="img_cate" v-model="inputTxt[0]">
-                            <option value="101">SEVENTEEN</option>
-                            <option value="102">LE SSERAFIM</option>
-                            <option value="103">NewJeans</option>
-                            <option value="104">INFINITE</option>
-                        </select>
-                    </p>
-                    <p><label for="img_address">이미지 주소</label><input type="text" id="img_address" v-model="inputTxt[1]"></p>
-                    <p><label for="img_tit">이미지 제목</label><input type="text" id="img_tit" v-model="inputTxt[2]"></p>
-                    <p><label for="img_nm">닉네임</label><input type="text" id="img_nm" v-model="inputTxt[3]"></p>
-                    <p><label for="img_pw">비밀번호</label><input type="text" id="img_pw" v-model="inputTxt[4]"></p>
-                </div>
-                <div class="popBtn">
-                    <button type="button" class="cancel" @click="addClick($event)">취소</button>
-                    <button type="button" class="add" @click="sendRequest('cateAdd', inputTxt)">등록</button>
-                </div>
-            </div>
-            <div class="popDim"></div>
-        </div>
+        <cateAddPop :addPop="ref(addPop)" @popClose="popClose" @popSubmit="popSubmit"></cateAddPop>
     </div>
     <div class="cateCont">
       <div class="cateDetail" v-for="(item, idx) in cateData" :key="idx" :cate-name=item.cate_nm>
@@ -43,6 +19,14 @@
           />
         </div>
         <p class="detailTit">{{ item.photo_txt }}</p>
+        <p class="writeUser"><span class="user">{{ item.photo_user }}</span><span class="cateNm">{{ item.cate_nm }}</span></p>
+        <button type="button" class="deleteOpen" @click="deleteClick($event)">삭제</button>
+        <div class="deleteWrap">
+          <div class="pwBox">
+            <input type="text"><button type="button" class="cateDelete" @click="deleteCate($event, item.cont_id)">확인</button><button type="button" class="deleteCancel" @click="deleteClick($event)">취소</button>
+          </div>
+          <p class="errMsg">비밀번호가 틀렸습니다. 다시 입력해주세요.</p>
+        </div>
       </div>
       <div class="cateNone" v-if="cateNone === true">
         <p>항목이 0개 입니다.</p>
@@ -53,12 +37,9 @@
 
 <script setup lang="ts">
   import axios from 'axios'
-  import type { Ref } from 'vue'
+  import type { InputHTMLAttributes, Ref } from 'vue'
   import { onMounted, ref } from 'vue'
-
-  let inputTxt:Ref<(string|number)[]> = ref([
-    101,'','','',''
-  ])
+  import cateAddPop from '@/components/catePop/cateAddPop.vue'
 
   type category = { 
     cate_code:string;
@@ -114,6 +95,34 @@
     }
   }
 
+  function popClose(pop:boolean) {
+    addPop.value = pop
+  }
+
+  function popSubmit(result:(string|number)[]) {
+    sendRequest('cateAdd', result)
+  }
+
+  function deleteClick(e:MouseEvent) {
+    if (e != undefined) {
+      if ((e.target as Element)?.classList.contains('deleteOpen')) {
+        (e.target as Element)?.nextElementSibling?.classList.add('on')
+      } else {
+        (e.target as Element)?.closest('.deleteWrap')?.classList.remove('on')
+      }
+    }
+  }
+
+  function deleteCate(e:MouseEvent, contid:number) {
+    if (e != undefined) {
+      const clickInput = (e.target as Element).previousElementSibling as HTMLInputElement
+      if (clickInput != null) {
+        const clickInputValue = clickInput.value
+        sendRequest('cateDelete', {contid, clickInputValue})
+      }
+    }
+  }
+
   type sendType = {
     func:string,
     data:string|{}
@@ -121,7 +130,9 @@
 
   type resultType = {
     func:string,
-    data:[]
+    data:[],
+    errorData?:{msg:string, id:number}
+    dataCount?:[]
   }
 
   async function sendRequest(functionName:string, dataInfo:string|{}) { // axios post control
@@ -156,22 +167,42 @@ function postProcess(data:resultType) {  // 성공 시 값에 따라 함수 제�
       cateClick(data.data);
       break;
     case 'cateAdd':
-      cateAdd(data.data)
+      cateAdd(data.data, data.dataCount)
       break;
-    /*case 'cateDelete':
-      cateDelete(data.data)
-      break;*/
+    case 'cateDelete':
+      cateDelete(data?.data, data?.errorData, data.dataCount)
+      break;
   }
 }
 
 function cateClick(data:cateCont[]) {
   cateData.value = data
-  console.log(cateCount.value)
 }
-function cateAdd(data:cateCont[]) {
+
+function cateAdd(data:cateCont[], dataCount:cateNum[] | undefined) {
   cateData.value = data
   addPop.value = false
   cateAll += 1
+  if (dataCount != undefined) {
+    cateCount.value = dataCount
+  }
+}
+
+function cateDelete(data?:cateCont[] | undefined, errorData?:{msg:string, id:number} | undefined, dataCount?:cateNum[] | undefined) {
+  if (data == undefined) {
+    if (errorData != undefined) {
+      let errorIdx = cateData.value.findIndex(item => item.cont_id == errorData.id)
+      let errorCont = document.getElementsByClassName('cateDetail')[errorIdx]
+      errorCont.classList.add('pwError');
+      (errorCont.lastElementChild?.children[0].children[0] as InputHTMLAttributes).value = '';
+    }
+  } else {
+    if (dataCount != undefined) {
+      cateAll -= 1
+      cateData.value = data
+      cateCount.value = dataCount
+    }
+  }
 }
 
 </script>

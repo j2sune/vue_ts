@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <flickingSlide></flickingSlide>
     <div class="bundle" v-for="(bdItem, idx) in codeList" :key="idx">
       <h2 class="mainTit">{{ bdItem.mainTit }}</h2>
       <button v-if="bdItem.popInner != undefined" type="button" class="about popOpen" @click="popOpen($event)">작업 방식</button>
@@ -14,6 +15,7 @@
 import type { Component, Ref } from 'vue'
 import { ref } from 'vue'
 import { popCont, slide, tab, arrcodion, tooltip, search, sortTable, scrollTab, lazyLoad, dropDown, bookmark, sortInputTable, toast, layerPop, category } from '@/router/components'
+import flickingSlide from '@/components/flickingSlide.vue'
 
 type codeListType = {
   componentName: Component

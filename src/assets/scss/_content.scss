@@ -1078,7 +1078,7 @@ header {
   .cateDetail {
     position:relative;
     width: 30%;
-    height: 340px;
+    height: 360px;
     padding: 20px;
     background: #efefef;
     border-radius: 10px;
@@ -1126,6 +1126,8 @@ header {
       position:absolute;
       right:20px;
       bottom:20px;
+      background:#fff;
+      padding:5px;
     }
     .deleteWrap {
       position:absolute;
@@ -1149,6 +1151,11 @@ header {
       }
       input {
         width:70%;
+        background:#fff;
+      }
+      button {
+        background:#fff;
+        padding:3px;
       }
       .errMsg {
         display:none;
@@ -1229,6 +1236,37 @@ header {
           background:plum;
         }
       }
+    }
+  }
+}
+
+/* flicking */
+.flickingWrap {
+  margin-top:80px;
+  overflow-x:hidden;
+  .flickingBox {
+    width:100%;
+    height:200px;
+  }
+  .flicking-viewport {
+    height:100%;
+  }
+  .panel {
+    width:100%;
+    height:100%;
+  }
+  .scrollBar {
+    position:relative;
+    margin-top:20px;
+    height:5px;
+    background:#f4eeed;
+    .now {
+      position:absolute;
+      top:0;
+      left:0;
+      background:pink;
+      height:100%;
+      transition:.5s;
     }
   }
 }
