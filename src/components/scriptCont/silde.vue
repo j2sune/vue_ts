@@ -34,10 +34,10 @@
   }
 
   const slideData:dataType[] = [
-    {cname:'slide1', url:'/img/1.png', alt:'슬라이드1'},
-    {cname:'slide2', url:'/img/2.png', alt:'슬라이드2'},
-    {cname:'slide3', url:'/img/3.png', alt:'슬라이드3'},
-    {cname:'slide4', url:'/img/4.png', alt:'슬라이드4'}
+    {cname:'slide1', url:'img/1.png', alt:'슬라이드1'},
+    {cname:'slide2', url:'img/2.png', alt:'슬라이드2'},
+    {cname:'slide3', url:'img/3.png', alt:'슬라이드3'},
+    {cname:'slide4', url:'img/4.png', alt:'슬라이드4'}
   ]
 
   let slideBox:HTMLElement | null;

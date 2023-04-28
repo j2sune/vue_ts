@@ -40,35 +40,35 @@
       tabButton:'Toy Story',
       tabTit: '1번',
       tabCont: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque rerum veritatis quam ducimus velit laudantium similique quo quos, harum, commodi accusantium officia ex a libero animi labore nesciunt laborum eum?',
-      tcImg: '/img/t1.jpg',
+      tcImg: 'img/t1.jpg',
       tcAlt: '1번'
     },
     {
       tabButton:'Rapunzel',
       tabTit: '2번',
       tabCont: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque rerum veritatis quam ducimus velit laudantium similique quo quos, harum, commodi accusantium officia ex a libero animi labore nesciunt laborum eum?',
-      tcImg: '/img/t2.jpeg',
+      tcImg: 'img/t2.jpeg',
       tcAlt: '2번'
     },
     {
       tabButton:'Inside Out',
       tabTit: '3번',
       tabCont: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque rerum veritatis quam ducimus velit laudantium similique quo quos, harum, commodi accusantium officia ex a libero animi labore nesciunt laborum eum?',
-      tcImg: '/img/t3.jpeg',
+      tcImg: 'img/t3.jpeg',
       tcAlt: '3번'
     },
     {
       tabButton:'Pooh',
       tabTit: '4번',
       tabCont: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque rerum veritatis quam ducimus velit laudantium similique quo quos, harum, commodi accusantium officia ex a libero animi labore nesciunt laborum eum?',
-      tcImg: '/img/t4.jpg',
+      tcImg: 'img/t4.jpg',
       tcAlt: '4번'
     },
     {
       tabButton:'Disney Princess',
       tabTit: '5번',
       tabCont: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque rerum veritatis quam ducimus velit laudantium similique quo quos, harum, commodi accusantium officia ex a libero animi labore nesciunt laborum eum?',
-      tcImg: '/img/t5.jpg',
+      tcImg: 'img/t5.jpg',
       tcAlt: '5번'
     }
   ]
